@@ -7,6 +7,7 @@ import {
   TextInput,
   View,
 } from 'react-native';
+import { colors } from '../../theme';
 
 type Todo = {
   id: string;
@@ -94,7 +95,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
-    backgroundColor: '#bae6fd',
+    backgroundColor: colors.background,
   },
   inputRow: {
     flexDirection: 'row',

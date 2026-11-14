@@ -1,62 +1,66 @@
 import { TopTabs } from 'expo-router/js-top-tabs';
+import { StyleSheet, Text, View } from 'react-native';
+import { colors, shadows } from '../../theme';
 
 export const unstable_settings = {
   initialRouteName: 'index',
 };
+
+type TabButtonProps = {
+  focused: boolean;
+  children: string;
+};
+
+function TabButton({ focused, children }: TabButtonProps) {
+  return (
+    <View
+      style={[
+        styles.button,
+        focused ? styles.buttonPressed : styles.buttonRaised,
+      ]}
+    >
+      <Text style={[styles.text, focused && styles.textPressed]}>
+        {children}
+      </Text>
+    </View>
+  );
+}
 
 export default function TabsLayout() {
   return (
     <TopTabs
       screenOptions={{
         tabBarScrollEnabled: true,
+        swipeEnabled: false,
 
-        // 1. Вся полоса вкладок
+        // Вся полоса вкладок
         tabBarStyle: {
-          backgroundColor: '#e0f2fe',
+          backgroundColor: colors.background,
           elevation: 0,
         },
 
-        // 2. Ряд вкладок внутри полосы: отступы по краям
+        // Отступы вокруг ряда кнопок: нужны, чтобы тени не обрезались
         tabBarContentContainerStyle: {
-          paddingHorizontal: 8,
-          paddingVertical: 8,
+          paddingHorizontal: 10,
+          paddingVertical: 10,
         },
+        tabBarGap: 10,
 
-        // 3. Расстояние между вкладками
-        tabBarGap: 8,
-
-        // 4. Каждая вкладка: рамка-«кнопка»
+        // Вкладка теперь просто «место» под нашу кнопку
         tabBarItemStyle: {
           width: 'auto',
           minHeight: 0,
-          paddingHorizontal: 16,
-          paddingVertical: 8,
-          borderWidth: 1,
-          borderColor: '#7dd3fc',
-          borderRadius: 6,
-          overflow: 'hidden',
+          padding: 0,
         },
 
-        // 5. Текст вкладки
-        tabBarLabelStyle: {
-          fontSize: 14,
-          fontWeight: '600',
-          textTransform: 'none',
-        },
-        tabBarActiveTintColor: 'white',
-        tabBarInactiveTintColor: '#0369a1',
+        // Вместо текста рисуем свою кнопку
+        tabBarLabel: ({ focused, children }) => (
+          <TabButton focused={focused}>{children}</TabButton>
+        ),
 
-        // 6. Синий прямоугольник выбранной вкладки
-        tabBarIndicatorStyle: {
-          backgroundColor: '#0284c7',
-          height: undefined,
-          top: 8,
-          bottom: 8,
-          borderRadius: 6,
-        },
-
-        // 7. Эффект нажатия
-        tabBarPressColor: 'rgba(2, 132, 199, 0.3)',
+        // Убираем синий прямоугольник и волну при нажатии
+        tabBarIndicatorStyle: { backgroundColor: 'transparent' },
+        tabBarPressColor: 'transparent',
       }}
     >
       <TopTabs.Screen name="calendar" options={{ title: 'Календарь' }} />
@@ -67,3 +71,26 @@ export default function TabsLayout() {
     </TopTabs>
   );
 }
+
+const styles = StyleSheet.create({
+  button: {
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    borderRadius: 8,
+    backgroundColor: colors.background,
+  },
+  buttonRaised: {
+    boxShadow: shadows.raised,
+  },
+  buttonPressed: {
+    boxShadow: shadows.pressed,
+  },
+  text: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: colors.text,
+  },
+  textPressed: {
+    color: colors.accent,
+  },
+});

@@ -1,4 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native';
+import { colors } from '../../theme';
 
 export default function CaloriesScreen() {
   return (
@@ -13,7 +14,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#bae6fd',
+    backgroundColor: colors.background,
   },
   text: {
     fontSize: 18,
