@@ -2,6 +2,7 @@ export const colors = {
   background: '#e0f2fe',
   text: '#0369a1',
   accent: '#0284c7',
+  danger: '#dc2626',
 };
 
 export const shadows = {
