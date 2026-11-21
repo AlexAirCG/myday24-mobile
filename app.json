@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "myday24-mobile",
+    "name": "myday24",
     "slug": "myday24-mobile",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -11,6 +11,7 @@
       "icon": "./assets/expo.icon"
     },
     "android": {
+      "package": "com.aleksandr.myday24",
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
         "foregroundImage": "./assets/images/android-icon-foreground.png",
